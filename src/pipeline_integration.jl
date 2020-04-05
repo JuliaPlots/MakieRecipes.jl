@@ -1,18 +1,18 @@
 # import Plots
-using RecipePipeline
+using RecipesPipeline
 
 # Define overrides for RecipesPipeline hooks.
 
 RecipesBase.apply_recipe(plotattributes, ::Type{T}, ::AbstractPlotting.Scene) where T = throw(MethodError("Unmatched plot type: $T"))
 
 # Allow a series type to be plotted.
-RecipePipeline.is_seriestype_supported(sc::Scene, st) = haskey(makie_seriestype_map, st)
+RecipesPipeline.is_seriestype_supported(sc::Scene, st) = haskey(makie_seriestype_map, st)
 
 # Forward the argument preprocessing to Plots for now.
-RecipePipeline.series_defaults(sc::Scene, args...) = Dict{Symbol, Any}()
+RecipesPipeline.series_defaults(sc::Scene, args...) = Dict{Symbol, Any}()
 
 # Pre-processing of user recipes
-function RecipePipeline.process_userrecipe!(sc::Scene, kw_list, kw)
+function RecipesPipeline.process_userrecipe!(sc::Scene, kw_list, kw)
     if isa(get(kw, :marker_z, nothing), Function)
         # TODO: should this take y and/or z as arguments?
         kw[:marker_z] = isa(kw[:z], Nothing) ? map(kw[:marker_z], kw[:x], kw[:y]) :
@@ -29,7 +29,7 @@ function RecipePipeline.process_userrecipe!(sc::Scene, kw_list, kw)
 end
 
 # Determine axis limits
-function RecipePipeline.get_axis_limits(sc::Scene, f, letter)
+function RecipesPipeline.get_axis_limits(sc::Scene, f, letter)
     lims = to_value(AbstractPlotting.data_limits(sc))
     i = if letter === :x
             1
@@ -57,7 +57,7 @@ end
 # slice_arg(wrapper::Plots.InputWrapper, idx) = wrapper.obj
 slice_arg(v, idx) = v
 
-# function RecipePipeline.slice_series_attributes!(sc::Scene, kw_list, kw)
+# function RecipesPipeline.slice_series_attributes!(sc::Scene, kw_list, kw)
 #     idx = Int(kw[:series_plotindex]) - Int(kw_list[1][:series_plotindex]) + 1
 #
 #     for k in keys(Plots._series_defaults)
@@ -193,7 +193,7 @@ function plot_series_annotations!(plt, args, pt, plotattributes)
 end
 
 # Add the "series" to the Scene.
-function RecipePipeline.add_series!(plt::Scene, plotattributes)
+function RecipesPipeline.add_series!(plt::Scene, plotattributes)
 
     # kys = filter((x -> x !∈ (:plot_object, :x, :y)), keys(plotattributes))
     # vals = getindex.(Ref(plotattributes), kys)
@@ -252,14 +252,14 @@ end
 #
 # # AbstractPlotting.scatter!(sc, rand(10))
 # sc = Scene()
-# RecipePipeline.recipe_pipeline!(sc, Dict{Symbol, Any}(:seriestype => :scatter), (1:10, rand(10, 2)))
+# RecipesPipeline.recipe_pipeline!(sc, Dict{Symbol, Any}(:seriestype => :scatter), (1:10, rand(10, 2)))
 #
-# RecipePipeline.recipe_pipeline!(sc, Dict(:color => :blue, :seriestype => :path), (1:10, rand(10, 1)))
+# RecipesPipeline.recipe_pipeline!(sc, Dict(:color => :blue, :seriestype => :path), (1:10, rand(10, 1)))
 #
-# RecipePipeline.recipe_pipeline!(sc, Dict(:seriestype => :scatter), (1:10, rand(10, 2)))
+# RecipesPipeline.recipe_pipeline!(sc, Dict(:seriestype => :scatter), (1:10, rand(10, 2)))
 #
 #
-# using DifferentialEquations, RecipePipeline, Makie
+# using DifferentialEquations, RecipesPipeline, Makie
 # import Plots # we need some recipes from here
 #
 # f(u,p,t) = 1.01.*u
@@ -268,7 +268,7 @@ end
 # prob = ODEProblem(f,u0,tspan)
 # sol = solve(prob, Tsit5(), reltol=1e-8, abstol=1e-8)
 #
-# RecipePipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(), (sol,))
+# RecipesPipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(), (sol,))
 #
 #
 # A  = [1. 0  0 -5
@@ -281,7 +281,7 @@ end
 # prob = ODEProblem(f,u0,tspan)
 # sol = solve(prob, Tsit5(), reltol=1e-8, abstol=1e-8)
 #
-# RecipePipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(), (sol,))
+# RecipesPipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(), (sol,))
 #
 # f(du,u,p,t) = (du .= u)
 # g(du,u,p,t) = (du .= u)
@@ -291,12 +291,12 @@ end
 # prob = SDEProblem(f,g,u0,(0.0,1.0),noise=W)
 # sol = solve(prob,SRIW1())
 #
-# RecipePipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(), (sol,))
+# RecipesPipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(), (sol,))
 #
 #
-# RecipePipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(:seriestype => :surface, :cgrad => :inferno), (rand(10, 10),))
+# RecipesPipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(:seriestype => :surface, :cgrad => :inferno), (rand(10, 10),))
 #
-# RecipePipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(:seriestype => :heatmap), (rand(10, 10),))
+# RecipesPipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(:seriestype => :heatmap), (rand(10, 10),))
 #
 # # # Phylogenetic tree
 # using Phylo
@@ -304,12 +304,12 @@ end
 # evolve(tree) = Phylo.map_depthfirst((val, node) -> val + randn(), 0., tree, Float64)
 # trait = evolve(hummer)
 #
-# scp = RecipePipeline.recipe_pipeline!(Scene(scale_plot = false, show_axis = false), Dict{Symbol, Any}(:treetype=>:fan, :line_z => trait, :linewidth => 5, :showtips => false, :cgrad => :RdYlBu, :seriestype => :path), (hummer,))
+# scp = RecipesPipeline.recipe_pipeline!(Scene(scale_plot = false, show_axis = false), Dict{Symbol, Any}(:treetype=>:fan, :line_z => trait, :linewidth => 5, :showtips => false, :cgrad => :RdYlBu, :seriestype => :path), (hummer,))
 #
 # # Timeseries with market data
 # using MarketData, TimeSeries
 #
-# RecipePipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(:seriestype => :path), (MarketData.ohlc,))
+# RecipesPipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(:seriestype => :path), (MarketData.ohlc,))
 #
 # # Julia AST with GraphRecipes
 # using GraphRecipes
@@ -326,8 +326,8 @@ end
 #
 # plot(code, fontsize=12, shorten=0.01, axis_buffer=0.15, nodeshape=:rect)
 #
-# RecipePipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(:fontsize => 12, :shorten => 0.01, :axis_buffer => 0.15, :nodeshape => :rect), (code,))
+# RecipesPipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(:fontsize => 12, :shorten => 0.01, :axis_buffer => 0.15, :nodeshape => :rect), (code,))
 #
-# RecipePipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(:method=>:tree, :fontsize=>10, :nodeshape=>:ellipse), (AbstractFloat,))
+# RecipesPipeline.recipe_pipeline!(Scene(), Dict{Symbol, Any}(:method=>:tree, :fontsize=>10, :nodeshape=>:ellipse), (AbstractFloat,))
 #
 # # #
