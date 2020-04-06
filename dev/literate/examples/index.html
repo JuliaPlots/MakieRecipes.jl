@@ -19,7 +19,7 @@ tspan = (0.0,1.0)
 prob = ODEProblem(f,u0,tspan)
 sol = solve(prob, Tsit5(), reltol=1e-8, abstol=1e-8)
 
-recipeplot(sol)</code></pre><p><img src="../exp.svg" alt/></p><h3 id="Matrix-DiffEq-1"><a class="docs-heading-anchor" href="#Matrix-DiffEq-1">Matrix DiffEq</a><a class="docs-heading-anchor-permalink" href="#Matrix-DiffEq-1" title="Permalink"></a></h3><pre><code class="language-julia">A  = [1. 0  0 -5
+recipeplot(sol)</code></pre><p><img src="../exp.svg" alt/></p><h3 id="Matrix-DiffEq-1"><a class="docs-heading-anchor" href="#Matrix-DiffEq-1">Matrix DiffEq</a><a class="docs-heading-anchor-permalink" href="#Matrix-DiffEq-1" title="Permalink"></a></h3><pre><code class="language-">A  = [1. 0  0 -5
       4 -2  4 -3
      -4  0  0  1
       5 -2  2  3]
@@ -29,7 +29,9 @@ f(u,p,t) = A*u
 prob = ODEProblem(f,u0,tspan)
 sol = solve(prob, Tsit5(), reltol=1e-8, abstol=1e-8)
 
-recipeplot(sol)</code></pre><p><img src="../mat.svg" alt/></p><h3 id="Stochastic-DiffEq-1"><a class="docs-heading-anchor" href="#Stochastic-DiffEq-1">Stochastic DiffEq</a><a class="docs-heading-anchor-permalink" href="#Stochastic-DiffEq-1" title="Permalink"></a></h3><pre><code class="language-julia">f(du,u,p,t) = (du .= u)
+recipeplot(sol)
+
+AbstractPlotting.save(&quot;mat.svg&quot;, AbstractPlotting.current_scene()); nothing #hide</code></pre><p><img src="mat.svg" alt/></p><h3 id="Stochastic-DiffEq-1"><a class="docs-heading-anchor" href="#Stochastic-DiffEq-1">Stochastic DiffEq</a><a class="docs-heading-anchor-permalink" href="#Stochastic-DiffEq-1" title="Permalink"></a></h3><pre><code class="language-">f(du,u,p,t) = (du .= u)
 g(du,u,p,t) = (du .= u)
 u0 = rand(4,2)
 
@@ -37,7 +39,9 @@ W = WienerProcess(0.0,0.0,0.0)
 prob = SDEProblem(f,g,u0,(0.0,1.0),noise=W)
 sol = solve(prob,SRIW1())
 
-recipeplot(sol)</code></pre><p><img src="../stochastic.svg" alt/></p><h2 id="Phylogenetic-tree-1"><a class="docs-heading-anchor" href="#Phylogenetic-tree-1">Phylogenetic tree</a><a class="docs-heading-anchor-permalink" href="#Phylogenetic-tree-1" title="Permalink"></a></h2><pre><code class="language-julia">using Phylo
+recipeplot(sol)
+
+AbstractPlotting.save(&quot;stochastic.svg&quot;, AbstractPlotting.current_scene()); nothing #hide</code></pre><p><img src="stochastic.svg" alt/></p><h2 id="Phylogenetic-tree-1"><a class="docs-heading-anchor" href="#Phylogenetic-tree-1">Phylogenetic tree</a><a class="docs-heading-anchor-permalink" href="#Phylogenetic-tree-1" title="Permalink"></a></h2><pre><code class="language-julia">using Phylo
 assetpath = joinpath(dirname(pathof(MakieRecipes)), &quot;..&quot;, &quot;docs&quot;, &quot;src&quot;, &quot;assets&quot;)
 hummer = open(t -&gt; parsenewick(t, NamedPolytomousTree), joinpath(assetpath, &quot;hummingbirds.tree&quot;))
 evolve(tree) = Phylo.map_depthfirst((val, node) -&gt; val + randn(), 0., tree, Float64)
@@ -68,4 +72,4 @@ end
 
 recipeplot(code; fontsize = 12, shorten = 0.01, axis_buffer = 0.15, nodeshape = :rect)
 AbstractPlotting.save(&quot;ast.svg&quot;, AbstractPlotting.current_scene()); nothing #hide</code></pre><p><img src="../ast.svg" alt/></p><h3 id="Type-tree-with-GraphRecipes-1"><a class="docs-heading-anchor" href="#Type-tree-with-GraphRecipes-1">Type tree with GraphRecipes</a><a class="docs-heading-anchor-permalink" href="#Type-tree-with-GraphRecipes-1" title="Permalink"></a></h3><pre><code class="language-">recipeplot(AbstractFloat; method = :tree, fontsize = 10)
-AbstractPlotting.save(&quot;typetree.svg&quot;, AbstractPlotting.current_scene()); nothing #hide</code></pre><p><img src="../typetree.svg" alt/></p><hr/><p><em>This page was generated using <a href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a>.</em></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../../">« MakieRecipes</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Monday 6 April 2020 08:54">Monday 6 April 2020</span>. Using Julia version 1.4.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+AbstractPlotting.save(&quot;typetree.svg&quot;, AbstractPlotting.current_scene()); nothing #hide</code></pre><p><img src="../typetree.svg" alt/></p><hr/><p><em>This page was generated using <a href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a>.</em></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../../">« MakieRecipes</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Monday 6 April 2020 10:14">Monday 6 April 2020</span>. Using Julia version 1.4.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
