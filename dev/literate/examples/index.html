@@ -11,30 +11,15 @@ RecipesBase.@recipe function plot(::T, n = 1; customcolor = :green)
     rand(10,n)                   # return the arguments (input data) for the next recipe
 end
 
-recipeplot(T(); seriestype = :path)</code></pre><pre><code class="language-none">cs = (:green, nothing, nothing, nothing, nothing, nothing)
-cs = (:green, nothing, nothing, nothing, nothing, nothing)
-cs = (:green, nothing, nothing, nothing, nothing, nothing)</code></pre><p><img src="../basic.svg" alt/></p><h2 id="Testing-out-series-decomposition-1"><a class="docs-heading-anchor" href="#Testing-out-series-decomposition-1">Testing out series decomposition</a><a class="docs-heading-anchor-permalink" href="#Testing-out-series-decomposition-1" title="Permalink"></a></h2><pre><code class="language-julia">sc = Scene()
+recipeplot(T(); seriestype = :path)</code></pre><p><img src="../basic.svg" alt/></p><h2 id="Testing-out-series-decomposition-1"><a class="docs-heading-anchor" href="#Testing-out-series-decomposition-1">Testing out series decomposition</a><a class="docs-heading-anchor-permalink" href="#Testing-out-series-decomposition-1" title="Permalink"></a></h2><pre><code class="language-julia">sc = Scene()
 recipeplot!(sc, rand(10, 2); seriestype = :scatter)
-recipeplot!(sc, 1:10, rand(10, 1); seriestype = :path)</code></pre><pre><code class="language-none">cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)</code></pre><p><img src="../series.svg" alt/></p><h2 id="Differential-Equations-1"><a class="docs-heading-anchor" href="#Differential-Equations-1">Differential Equations</a><a class="docs-heading-anchor-permalink" href="#Differential-Equations-1" title="Permalink"></a></h2><pre><code class="language-julia">using OrdinaryDiffEq, StochasticDiffEq, DiffEqNoiseProcess</code></pre><h3 id="A-simple-exponential-growth-model-1"><a class="docs-heading-anchor" href="#A-simple-exponential-growth-model-1">A simple exponential growth model</a><a class="docs-heading-anchor-permalink" href="#A-simple-exponential-growth-model-1" title="Permalink"></a></h3><pre><code class="language-julia">f(u,p,t) = 1.01.*u
+recipeplot!(sc, 1:10, rand(10, 1); seriestype = :path)</code></pre><p><img src="../series.svg" alt/></p><h2 id="Differential-Equations-1"><a class="docs-heading-anchor" href="#Differential-Equations-1">Differential Equations</a><a class="docs-heading-anchor-permalink" href="#Differential-Equations-1" title="Permalink"></a></h2><pre><code class="language-julia">using OrdinaryDiffEq, StochasticDiffEq, DiffEqNoiseProcess</code></pre><h3 id="A-simple-exponential-growth-model-1"><a class="docs-heading-anchor" href="#A-simple-exponential-growth-model-1">A simple exponential growth model</a><a class="docs-heading-anchor-permalink" href="#A-simple-exponential-growth-model-1" title="Permalink"></a></h3><pre><code class="language-julia">f(u,p,t) = 1.01.*u
 u0 = [1/2, 1]
 tspan = (0.0,1.0)
 prob = ODEProblem(f,u0,tspan)
 sol = solve(prob, Tsit5(), reltol=1e-8, abstol=1e-8)
 
-recipeplot(sol)</code></pre><pre><code class="language-none">cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)</code></pre><p><img src="../exp.svg" alt/></p><h3 id="Matrix-DiffEq-1"><a class="docs-heading-anchor" href="#Matrix-DiffEq-1">Matrix DiffEq</a><a class="docs-heading-anchor-permalink" href="#Matrix-DiffEq-1" title="Permalink"></a></h3><pre><code class="language-julia">A  = [1. 0  0 -5
+recipeplot(sol)</code></pre><p><img src="../exp.svg" alt/></p><h3 id="Matrix-DiffEq-1"><a class="docs-heading-anchor" href="#Matrix-DiffEq-1">Matrix DiffEq</a><a class="docs-heading-anchor-permalink" href="#Matrix-DiffEq-1" title="Permalink"></a></h3><pre><code class="language-julia">A  = [1. 0  0 -5
       4 -2  4 -3
      -4  0  0  1
       5 -2  2  3]
@@ -44,30 +29,7 @@ f(u,p,t) = A*u
 prob = ODEProblem(f,u0,tspan)
 sol = solve(prob, Tsit5(), reltol=1e-8, abstol=1e-8)
 
-recipeplot(sol)</code></pre><pre><code class="language-none">cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)</code></pre><p><img src="../mat.svg" alt/></p><h3 id="Stochastic-DiffEq-1"><a class="docs-heading-anchor" href="#Stochastic-DiffEq-1">Stochastic DiffEq</a><a class="docs-heading-anchor-permalink" href="#Stochastic-DiffEq-1" title="Permalink"></a></h3><pre><code class="language-julia">f(du,u,p,t) = (du .= u)
+recipeplot(sol)</code></pre><p><img src="../mat.svg" alt/></p><h3 id="Stochastic-DiffEq-1"><a class="docs-heading-anchor" href="#Stochastic-DiffEq-1">Stochastic DiffEq</a><a class="docs-heading-anchor-permalink" href="#Stochastic-DiffEq-1" title="Permalink"></a></h3><pre><code class="language-julia">f(du,u,p,t) = (du .= u)
 g(du,u,p,t) = (du .= u)
 u0 = rand(4,2)
 
@@ -75,30 +37,7 @@ W = WienerProcess(0.0,0.0,0.0)
 prob = SDEProblem(f,g,u0,(0.0,1.0),noise=W)
 sol = solve(prob,SRIW1())
 
-recipeplot(sol)</code></pre><pre><code class="language-none">cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)</code></pre><p><img src="../stochastic.svg" alt/></p><h3 id="Animating-a-differential-equation-solution-1"><a class="docs-heading-anchor" href="#Animating-a-differential-equation-solution-1">Animating a differential equation solution</a><a class="docs-heading-anchor-permalink" href="#Animating-a-differential-equation-solution-1" title="Permalink"></a></h3><p>You can update arguments and attributes arbitrarily, and the recipe pipeline is rerun.</p><pre><code class="language-julia">function lorenz(du, u, p, t)
+recipeplot(sol)</code></pre><p><img src="../stochastic.svg" alt/></p><h3 id="Animating-a-differential-equation-solution-1"><a class="docs-heading-anchor" href="#Animating-a-differential-equation-solution-1">Animating a differential equation solution</a><a class="docs-heading-anchor-permalink" href="#Animating-a-differential-equation-solution-1" title="Permalink"></a></h3><p>You can update arguments and attributes arbitrarily, and the recipe pipeline is rerun.</p><pre><code class="language-julia">function lorenz(du, u, p, t)
     du[1] = p[1]*(u[2]-u[1])
     du[2] = u[1]*(p[2]-u[3]) - u[2]
     du[3] = u[1]*u[2] - p[3]*u[3]
@@ -116,12 +55,12 @@ ylims!(sc, -30, 70) # avoid jitter when animating
 
 record(sc, &quot;lorenz.gif&quot;, LinRange(0, 35, 100)) do ρᵢ
     ρ[] = ρᵢ
-end</code></pre><pre><code class="language-none">&quot;lorenz.gif&quot;</code></pre><p><img src="../lorenz.gif" alt/></p><h2 id="Phylogenetic-tree-1"><a class="docs-heading-anchor" href="#Phylogenetic-tree-1">Phylogenetic tree</a><a class="docs-heading-anchor-permalink" href="#Phylogenetic-tree-1" title="Permalink"></a></h2><pre><code class="language-">using Phylo
+end</code></pre><pre><code class="language-none">&quot;lorenz.gif&quot;</code></pre><p><img src="../lorenz.gif" alt/></p><h2 id="Phylogenetic-tree-1"><a class="docs-heading-anchor" href="#Phylogenetic-tree-1">Phylogenetic tree</a><a class="docs-heading-anchor-permalink" href="#Phylogenetic-tree-1" title="Permalink"></a></h2><pre><code class="language-julia">using Phylo
 
 assetpath = joinpath(dirname(pathof(MakieRecipes)), &quot;..&quot;, &quot;docs&quot;, &quot;src&quot;, &quot;assets&quot;)
 hummers = open(t -&gt; parsenewick(t, NamedPolytomousTree), joinpath(assetpath, &quot;hummingbirds.tree&quot;))
 
-evolve(tree) = map_depthfirst((val, node) -&gt; val + randn(), 0., tree, Float64)
+evolve(tree) = Phylo.map_depthfirst((val, node) -&gt; val + randn(), 0., tree, Float64)
 
 trait = evolve(hummers)
 
@@ -135,11 +74,59 @@ scp = recipeplot(
     seriestype = :path,
     scale_plot = false, # Makie attributes can be used here as well!
     show_axis = false
-)
-
-AbstractPlotting.save(&quot;phylo.svg&quot;, AbstractPlotting.current_scene()); nothing #hide</code></pre><p><img src="phylo.svg" alt/></p><h3 id="Animation-with-different-colormaps-(changing-attributes)-1"><a class="docs-heading-anchor" href="#Animation-with-different-colormaps-(changing-attributes)-1">Animation with different colormaps (changing attributes)</a><a class="docs-heading-anchor-permalink" href="#Animation-with-different-colormaps-(changing-attributes)-1" title="Permalink"></a></h3><p>You can update arguments and attributes arbitrarily, and the recipe pipeline is rerun.</p><pre><code class="language-">record(scp, &quot;phylo_colormaps.gif&quot;, PlotUtils.cgradients(:colorcet), framerate = 3) do cmap
+)</code></pre><pre><code class="language-none">WARNING: importing deprecated binding Compat.IteratorSize into Phylo.
+WARNING: importing deprecated binding Compat.IteratorEltype into Phylo.
+WARNING: Compat.Random is deprecated, use Random instead.
+  likely near /home/runner/.julia/packages/Phylo/nW34L/src/Iterators.jl:2
+WARNING: importing deprecated binding Compat.Random into Phylo.
+WARNING: importing deprecated binding Compat.IteratorSize into Phylo.
+WARNING: importing deprecated binding Compat.IteratorEltype into Phylo.
+WARNING: Compat.IteratorSize is deprecated, use Base.IteratorSize instead.
+  likely near /home/runner/.julia/packages/Phylo/nW34L/src/Iterators.jl:9
+WARNING: Compat.IteratorEltype is deprecated, use Base.IteratorEltype instead.
+  likely near /home/runner/.julia/packages/Phylo/nW34L/src/Iterators.jl:13
+WARNING: importing deprecated binding Compat.IteratorSize into Phylo.
+WARNING: Compat.IteratorSize is deprecated, use Base.IteratorSize instead.
+  likely near /home/runner/.julia/packages/Phylo/nW34L/src/TreeSet.jl:11
+WARNING: importing deprecated binding Compat.IteratorEltype into Phylo.
+WARNING: Compat.IteratorEltype is deprecated, use Base.IteratorEltype instead.
+  likely near /home/runner/.julia/packages/Phylo/nW34L/src/TreeSet.jl:16
+WARNING: Compat.Random is deprecated, use Random instead.
+  likely near /home/runner/.julia/packages/Phylo/nW34L/src/rand.jl:1
+WARNING: Compat.Printf is deprecated, use Printf instead.
+  likely near /home/runner/.julia/packages/Phylo/nW34L/src/show.jl:4
+WARNING: using Phylo.Node in module ex-examples conflicts with an existing identifier.
+┌ Warning: `empty!(df::DataFrame)` is deprecated, use `select!(df, Int[])` instead.
+│   caller = _resetleaves! at Tree.jl:47 [inlined]
+└ @ Core ~/.julia/packages/Phylo/nW34L/src/Tree.jl:47</code></pre><p><img src="../phylo.svg" alt/></p><h3 id="Animation-with-different-colormaps-(changing-attributes)-1"><a class="docs-heading-anchor" href="#Animation-with-different-colormaps-(changing-attributes)-1">Animation with different colormaps (changing attributes)</a><a class="docs-heading-anchor-permalink" href="#Animation-with-different-colormaps-(changing-attributes)-1" title="Permalink"></a></h3><p>You can update arguments and attributes arbitrarily, and the recipe pipeline is rerun.</p><pre><code class="language-julia">record(scp, &quot;phylo_colormaps.gif&quot;, PlotUtils.cgradients(:colorcet), framerate = 3) do cmap
     scp.plots[1].cgrad[] = cmap
-end</code></pre><p><img src="phylo_colormaps.gif" alt/></p><h2 id="GraphRecipes-1"><a class="docs-heading-anchor" href="#GraphRecipes-1">GraphRecipes</a><a class="docs-heading-anchor-permalink" href="#GraphRecipes-1" title="Permalink"></a></h2><pre><code class="language-julia">using GraphRecipes</code></pre><h3 id="Julia-AST-with-GraphRecipes-1"><a class="docs-heading-anchor" href="#Julia-AST-with-GraphRecipes-1">Julia AST with GraphRecipes</a><a class="docs-heading-anchor-permalink" href="#Julia-AST-with-GraphRecipes-1" title="Permalink"></a></h3><pre><code class="language-">code = quote
+end</code></pre><pre><code class="language-none">&quot;phylo_colormaps.gif&quot;</code></pre><p><img src="../phylo_colormaps.gif" alt/></p><h2 id="GraphRecipes-1"><a class="docs-heading-anchor" href="#GraphRecipes-1">GraphRecipes</a><a class="docs-heading-anchor-permalink" href="#GraphRecipes-1" title="Permalink"></a></h2><pre><code class="language-julia">using GraphRecipes</code></pre><h3 id="The-simplest-graph-recipe-1"><a class="docs-heading-anchor" href="#The-simplest-graph-recipe-1">The simplest graph recipe</a><a class="docs-heading-anchor-permalink" href="#The-simplest-graph-recipe-1" title="Permalink"></a></h3><p>Because <code>userplot</code> is unsupported, we have to use the low-level interface to user plot recipes, by wrapping our arguments in the userplot type.</p><pre><code class="language-">g = [0  1  1;
+     1  0  1;
+     1  1  0]
+
+recipeplot(GraphPlot((g,)); show_axis = false, scale_plot = false)
+
+AbstractPlotting.save(&quot;simplegraph.svg&quot;, AbstractPlotting.current_scene()); nothing #hide</code></pre><p><img src="simplegraph.svg" alt/></p><h3 id="Undirected-graph-with-node-labels-and-sizes-1"><a class="docs-heading-anchor" href="#Undirected-graph-with-node-labels-and-sizes-1">Undirected graph with node labels and sizes</a><a class="docs-heading-anchor-permalink" href="#Undirected-graph-with-node-labels-and-sizes-1" title="Permalink"></a></h3><pre><code class="language-">n = 15
+A = Float64[ rand() &lt; 0.5 ? 0 : rand() for i=1:n, j=1:n]
+for i=1:n
+    A[i, 1:i-1] = A[1:i-1, i]
+    A[i, i] = 0
+end
+
+recipeplot(GraphPlot((A,));
+          markersize = 0.2,
+          node_weights = 1:n,
+          markercolor = range(colorant&quot;yellow&quot;, stop=colorant&quot;red&quot;, length=n),
+          names = 1:n,
+          fontsize = 10,
+          linecolor = :darkgrey,
+          show_axis = false,
+          scale_plot = false
+          )
+
+AbstractPlotting.save(&quot;undigraph.svg&quot;, AbstractPlotting.current_scene()); nothing #hide</code></pre><p><img src="undigraph.svg" alt/></p><h3 id="Multigraphs-1"><a class="docs-heading-anchor" href="#Multigraphs-1">Multigraphs</a><a class="docs-heading-anchor-permalink" href="#Multigraphs-1" title="Permalink"></a></h3><pre><code class="language-">recipeplot(GraphPlot(([[1,1,2,2],[1,1,1],[1]],)); names=&quot;node_&quot;.*string.(1:3), nodeshape=:circle, self_edge_size=0.25, show_axis = false, scale_plot = false)
+
+AbstractPlotting.save(&quot;digraph.svg&quot;, AbstractPlotting.current_scene()); nothing #hide</code></pre><p><img src="digraph.svg" alt/></p><h3 id="Julia-AST-1"><a class="docs-heading-anchor" href="#Julia-AST-1">Julia AST</a><a class="docs-heading-anchor-permalink" href="#Julia-AST-1" title="Permalink"></a></h3><pre><code class="language-julia">code = quote
     function mysum(list)
         out = 0
         for value in list
@@ -149,52 +136,4 @@ end</code></pre><p><img src="phylo_colormaps.gif" alt/></p><h2 id="GraphRecipes-
     end
 end
 
-recipeplot(code; fontsize = 12, shorten = 0.01, axis_buffer = 0.15, nodeshape = :rect)
-AbstractPlotting.save(&quot;ast.svg&quot;, AbstractPlotting.current_scene()); nothing #hide</code></pre><p><img src="ast.svg" alt/></p><h3 id="Type-tree-with-GraphRecipes-1"><a class="docs-heading-anchor" href="#Type-tree-with-GraphRecipes-1">Type tree with GraphRecipes</a><a class="docs-heading-anchor-permalink" href="#Type-tree-with-GraphRecipes-1" title="Permalink"></a></h3><pre><code class="language-julia">recipeplot(AbstractFloat; method = :tree, fontsize = 10)</code></pre><pre><code class="language-none">cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (:black, nothing, nothing, nothing, nothing, nothing)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, 1)
-cs = (nothing, nothing, nothing, nothing, nothing, nothing)</code></pre><p><img src="../typetree.svg" alt/></p><hr/><p><em>This page was generated using <a href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a>.</em></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../../">« MakieRecipes</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Thursday 9 April 2020 12:39">Thursday 9 April 2020</span>. Using Julia version 1.4.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+recipeplot(code; fontsize = 12, shorten = 0.01, axis_buffer = 0.15, nodeshape = :rect)</code></pre><p><img src="../ast.svg" alt/></p><h3 id="Type-tree-with-GraphRecipes-1"><a class="docs-heading-anchor" href="#Type-tree-with-GraphRecipes-1">Type tree with GraphRecipes</a><a class="docs-heading-anchor-permalink" href="#Type-tree-with-GraphRecipes-1" title="Permalink"></a></h3><pre><code class="language-julia">recipeplot(AbstractFloat; method = :tree, fontsize = 10)</code></pre><p><img src="../typetree.svg" alt/></p><hr/><p><em>This page was generated using <a href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a>.</em></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../../">« MakieRecipes</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Saturday 11 April 2020 14:01">Saturday 11 April 2020</span>. Using Julia version 1.4.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
